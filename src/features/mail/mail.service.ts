@@ -19,4 +19,15 @@ export class MailService {
       },
     });
   }
+  async sendUserResetPassword(email: string, username: string, token: string) {
+    await this.mailerService.sendMail({
+      to: email,
+      subject: 'Reset Password',
+      template: './resetPassword',
+      context: {
+        name: username,
+        token,
+      },
+    });
+  }
 }

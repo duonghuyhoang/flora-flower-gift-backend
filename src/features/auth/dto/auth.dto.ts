@@ -41,3 +41,50 @@ export class LoginDto {
   @IsString()
   password: string;
 }
+
+export class emailToResetDto {
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+}
+
+export class confirmCodeDto {
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  @IsString()
+  token: string;
+}
+
+export class resetPasswordDto {
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  @IsString()
+  token: string;
+
+  @IsNotEmpty()
+  @IsString()
+  password: string;
+}
+export class changePasswordDto {
+  @IsNotEmpty()
+  @IsString()
+  user_id: string;
+
+  @IsNotEmpty()
+  @IsString()
+  confirm_password: string;
+
+  @IsNotEmpty()
+  @IsString()
+  new_password: string;
+
+  @IsNotEmpty()
+  @IsString()
+  password: string;
+}
