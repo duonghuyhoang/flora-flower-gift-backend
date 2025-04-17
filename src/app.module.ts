@@ -8,7 +8,7 @@ import { APP_PIPE } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { dbConfig } from '../ormconfig';
+import { AppDataSource } from '../ormconfig';
 
 import { AuthMiddleware } from './common/middlewares/auth.middleware';
 
@@ -16,19 +16,24 @@ import { AuthModule } from './features/auth/auth.module';
 import { UserProfileModule } from './features/user-profile/user-profile.module';
 import { ProductModule } from './features/product/product.module';
 import { MailModule } from './features/mail/mail.module';
+import { ExampleModule } from './features/example/example.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => dbConfig,
+      useFactory: async () => {
+        await AppDataSource.initialize();
+        return AppDataSource.options;
+      },
       inject: [ConfigService],
     }),
     MailModule,
     AuthModule,
     UserProfileModule,
     ProductModule,
+    ExampleModule,
   ],
   providers: [
     {

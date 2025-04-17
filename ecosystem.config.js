@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'crisp-server',
+      name: 'backend',
       script: 'npm run start:prod',
     },
   ],
